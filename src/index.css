@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color: #0A0F14;
+  background-image:
+    linear-gradient(rgba(0, 191, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 191, 255, 0.07) 1px, transparent 1px);
+  background-size: 50px 50px;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
