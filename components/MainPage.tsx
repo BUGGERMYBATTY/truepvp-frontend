@@ -47,4 +47,4 @@ const MainPage: React.FC<MainPageProps> = ({ onSelectGame }) => {
   );
 };
 
-export default MainPage;+
+export default MainPage;
