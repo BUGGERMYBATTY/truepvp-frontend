@@ -3,30 +3,45 @@ import Wallet from '../components/Wallet';
 import MainPage from '../components/MainPage';
 import { GAME_TITLES } from './utils/constants';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
-
 const DisclaimerModal = ({ onConfirm, checked, onCheckChange }: any) => (
-  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 animate-fadeIn">
-    <div className="bg-brand-dark p-8 rounded-xl shadow-2xl w-full max-w-md mx-4 border-2 border-yellow relative text-center">
-      <h2 className="text-3xl font-bold font-display mb-4 text-yellow">Important Notice</h2>
-      <p className="text-gray-300 text-lg leading-relaxed mb-2">
-        This is a self-custody platform. Your funds never leave your wallet. All wagers are peer-to-peer on Solana.
-      </p>
-      <div className="flex items-center justify-center mt-6 mb-6">
-        <input
-          id="disclaimer-check"
-          type="checkbox"
-          checked={checked}
-          onChange={(e) => onCheckChange(e.target.checked)}
-          className="h-5 w-5 rounded bg-brand-gray border-gray-500 text-yellow focus:ring-yellow cursor-pointer"
-        />
-        <label htmlFor="disclaimer-check" className="ml-3 text-gray-300 cursor-pointer">
-          Don't show again
-        </label>
+  <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn p-4">
+    <div className="relative bg-gradient-to-br from-brand-dark to-brand-gray p-8 rounded-2xl shadow-2xl w-full max-w-lg border-2 border-yellow/50 text-center">
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow/5 to-transparent rounded-2xl"></div>
+
+      <div className="relative z-10">
+        <div className="text-5xl mb-4">⚠️</div>
+        <h2 className="text-4xl font-bold font-display mb-6 text-yellow drop-shadow-lg">Important Notice</h2>
+
+        <div className="bg-brand-gray/50 backdrop-blur-sm border border-yellow/20 rounded-xl p-6 mb-6">
+          <p className="text-gray-200 text-lg leading-relaxed mb-4">
+            This is a <span className="text-yellow font-bold">self-custody platform</span>. Your funds never leave your wallet.
+          </p>
+          <p className="text-gray-200 text-lg leading-relaxed">
+            All wagers are <span className="text-blue-light font-bold">peer-to-peer</span> transactions on the Solana blockchain.
+          </p>
+        </div>
+
+        <div className="flex items-center justify-center mb-8">
+          <input
+            id="disclaimer-check"
+            type="checkbox"
+            checked={checked}
+            onChange={(e) => onCheckChange(e.target.checked)}
+            className="h-5 w-5 rounded bg-brand-gray border-gray-500 text-yellow focus:ring-yellow focus:ring-2 cursor-pointer"
+          />
+          <label htmlFor="disclaimer-check" className="ml-3 text-gray-300 cursor-pointer select-none hover:text-white transition-colors">
+            Don't show this again
+          </label>
+        </div>
+
+        <button
+          onClick={onConfirm}
+          className="group relative bg-gradient-to-r from-yellow to-yellow-light text-brand-dark font-bold py-4 px-10 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-yellow/50 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-shimmer-gradient animate-shimmer opacity-0 group-hover:opacity-100"></div>
+          <span className="relative z-10">I Understand, Continue</span>
+        </button>
       </div>
-      <button onClick={onConfirm} className="bg-yellow text-brand-dark font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-light transition-transform transform hover:scale-105">
-        I Understand
-      </button>
     </div>
   </div>
 );
@@ -37,25 +52,41 @@ const NicknameModal = ({ onSubmit }: any) => {
     e.preventDefault();
     if (name.trim()) onSubmit(name.trim());
   };
-  
+
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 animate-fadeIn">
-      <form onSubmit={handleSubmit} className="bg-brand-dark p-8 rounded-xl shadow-2xl w-full max-w-md mx-4 border-2 border-blue relative text-center">
-        <h2 className="text-3xl font-bold font-display mb-2 text-blue">Create Nickname</h2>
-        <p className="text-gray-400 mb-6">Choose a permanent nickname (cannot be changed)</p>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full bg-brand-gray border border-gray-600 rounded-md p-3 text-white text-center text-lg focus:outline-none focus:ring-2 focus:ring-blue mb-4"
-          placeholder="Enter nickname"
-          maxLength={16}
-          required
-          autoFocus
-        />
-        <button type="submit" className="w-full bg-blue text-brand-dark font-bold py-3 rounded-lg text-lg hover:bg-blue-light transition-transform transform hover:scale-105">
-          Set Nickname
-        </button>
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn p-4">
+      <form onSubmit={handleSubmit} className="relative bg-gradient-to-br from-brand-dark to-brand-gray p-8 rounded-2xl shadow-2xl w-full max-w-lg border-2 border-blue/50 text-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue/5 to-transparent rounded-2xl"></div>
+
+        <div className="relative z-10">
+          <div className="text-5xl mb-4">✨</div>
+          <h2 className="text-4xl font-bold font-display mb-3 text-blue drop-shadow-lg">Create Your Nickname</h2>
+          <p className="text-gray-300 mb-8 text-lg">Choose a permanent nickname for your wallet.<br />
+            <span className="text-sm text-gray-400">(This cannot be changed later)</span>
+          </p>
+
+          <div className="mb-6">
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-brand-gray/50 backdrop-blur-sm border-2 border-blue/30 focus:border-blue rounded-xl p-4 text-white text-center text-xl focus:outline-none focus:ring-2 focus:ring-blue/50 transition-all placeholder:text-gray-500"
+              placeholder="Enter your nickname"
+              maxLength={16}
+              required
+              autoFocus
+            />
+            <p className="text-xs text-gray-400 mt-2 text-right">{name.length}/16 characters</p>
+          </div>
+
+          <button
+            type="submit"
+            className="group relative w-full bg-gradient-to-r from-blue to-blue-light text-white font-bold py-4 rounded-xl text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue/50 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-shimmer-gradient animate-shimmer opacity-0 group-hover:opacity-100"></div>
+            <span className="relative z-10">Set Nickname</span>
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -68,7 +99,6 @@ const App: React.FC = () => {
   const [nickname, setNickname] = useState('');
   const [balance, setBalance] = useState(0);
   const [provider, setProvider] = useState<any>(null);
-  const [connection, setConnection] = useState<any>(null);
   const [isDemoMode, setIsDemoMode] = useState(false);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [showNicknameModal, setShowNicknameModal] = useState(false);
@@ -79,22 +109,20 @@ const App: React.FC = () => {
       const solanaProvider = (window as any).solana;
       if (solanaProvider?.isPhantom) {
         setProvider(solanaProvider);
-        
-        const conn = new (window as any).solanaWeb3.Connection(
-          (window as any).solanaWeb3.clusterApiUrl('devnet'),
-          'confirmed'
-        );
-        setConnection(conn);
 
         const handleConnect = async (publicKey: any) => {
           const address = publicKey.toString();
           setWalletAddress(address);
           setWalletConnected(true);
           setIsDemoMode(false);
-          
+
+          const conn = new (window as any).solanaWeb3.Connection(
+            (window as any).solanaWeb3.clusterApiUrl('devnet'),
+            'confirmed'
+          );
           const balance = await conn.getBalance(publicKey);
           setBalance(balance / (window as any).solanaWeb3.LAMPORTS_PER_SOL);
-          
+
           const stored = JSON.parse(localStorage.getItem('userNicknames') || '{}');
           if (stored[address]) {
             setNickname(stored[address]);
@@ -186,50 +214,81 @@ const App: React.FC = () => {
   }, [walletAddress]);
 
   return (
-    <main className="min-h-screen text-white font-sans flex flex-col items-center p-4">
+    <main className="min-h-screen text-white font-sans flex flex-col items-center">
       {showDisclaimer && (
-        <DisclaimerModal 
-          onConfirm={handleDisclaimerConfirm} 
-          checked={dontShowDisclaimer} 
-          onCheckChange={setDontShowDisclaimer} 
+        <DisclaimerModal
+          onConfirm={handleDisclaimerConfirm}
+          checked={dontShowDisclaimer}
+          onCheckChange={setDontShowDisclaimer}
         />
       )}
       {showNicknameModal && <NicknameModal onSubmit={handleSetNickname} />}
-      
-      <header className="w-full max-w-6xl mx-auto p-4 flex justify-between items-center border-b border-blue/20">
-        <div>
-          {currentGame ? (
-            <h1 className="text-3xl font-bold font-display tracking-wider text-yellow">
-              {GAME_TITLES[currentGame]}
-            </h1>
-          ) : (
-            <img src="/logo.png" alt="TRUEPVP.io" className="h-24" />
-          )}
-        </div>
-        <Wallet
-          connected={walletConnected}
-          address={walletAddress}
-          nickname={nickname}
-          balance={balance}
-          onConnect={connectWallet}
-          onDisconnect={handleDisconnect}
-          isDemoMode={isDemoMode}
-          onPlayAsGuest={handlePlayAsGuest}
-        />
-      </header>
 
-      <div className="w-full max-w-5xl flex items-center justify-center mt-8 px-4">
+      <div className="w-full">
+        <header className="relative w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue/30 to-transparent"></div>
+
+          <div className="relative">
+            {currentGame ? (
+              <h1 className="text-4xl font-bold font-display tracking-wider text-yellow drop-shadow-lg">
+                {GAME_TITLES[currentGame]}
+              </h1>
+            ) : (
+              <div className="flex items-center gap-3">
+                <div className="text-4xl">🎮</div>
+                <h1 className="text-3xl md:text-4xl font-bold font-display bg-gradient-to-r from-pink-light via-blue-light to-yellow-light bg-clip-text text-transparent">
+                  TRUEPVP.io
+                </h1>
+              </div>
+            )}
+          </div>
+
+          <Wallet
+            connected={walletConnected}
+            address={walletAddress}
+            nickname={nickname}
+            balance={balance}
+            onConnect={connectWallet}
+            onDisconnect={handleDisconnect}
+            isDemoMode={isDemoMode}
+            onPlayAsGuest={handlePlayAsGuest}
+          />
+        </header>
+      </div>
+
+      <div className="w-full max-w-6xl flex-1 flex items-center justify-center px-6 py-12">
         {!currentGame && <MainPage onSelectGame={setCurrentGame} />}
         {currentGame === 'solana-gold-rush' && (
-          <div className="text-center text-2xl text-yellow">
-            Gold Rush Game Coming Soon...
+          <div className="text-center animate-fadeIn">
+            <div className="text-8xl mb-6 animate-float">💰</div>
+            <h2 className="text-4xl font-bold font-display text-yellow mb-4">Gold Rush Game</h2>
+            <p className="text-xl text-gray-400">Coming Soon...</p>
           </div>
         )}
       </div>
 
-      <footer className="text-center text-gray-500 mt-auto pt-8">
-        <p>Demo application. All transactions on Solana devnet.</p>
-        {isDemoMode && <p className="text-yellow-light mt-2">Demo Mode Active</p>}
+      <footer className="w-full border-t border-blue/10 py-8">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-center md:text-left">
+              <p className="text-gray-400 text-sm">
+                Demo application. All transactions on Solana devnet.
+              </p>
+              {isDemoMode && (
+                <div className="flex items-center gap-2 mt-2 justify-center md:justify-start">
+                  <div className="w-2 h-2 bg-yellow-light rounded-full animate-pulse"></div>
+                  <p className="text-yellow-light text-sm font-semibold">Demo Mode Active</p>
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center gap-6 text-sm text-gray-500">
+              <span className="hover:text-blue-light transition-colors cursor-pointer">About</span>
+              <span className="hover:text-blue-light transition-colors cursor-pointer">FAQ</span>
+              <span className="hover:text-blue-light transition-colors cursor-pointer">Support</span>
+            </div>
+          </div>
+        </div>
       </footer>
     </main>
   );
