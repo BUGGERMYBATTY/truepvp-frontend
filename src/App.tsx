@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import Wallet from './components/Wallet';
-import MainPage from './components/MainPage';
+import Wallet from '../components/Wallet';
+import MainPage from '../components/MainPage';
 import { GAME_TITLES } from './utils/constants';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
